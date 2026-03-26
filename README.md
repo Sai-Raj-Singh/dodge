@@ -12,7 +12,8 @@ The **Streamlit app** (`streamlit_app/app.py`) pairs an interactive **vis-networ
 
 ## Working Demo Link
 
- **Demo URL: 'https://dodge-1.onrender.com/'
+ **Demo URL: 'https://dodge-1.onrender.com/'**
+ This project is deployed on free tier Render service so it might take few minutes to load the graph properly.
 
 
 ---
