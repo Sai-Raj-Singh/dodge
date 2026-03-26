@@ -12,8 +12,7 @@ The **Streamlit app** (`streamlit_app/app.py`) pairs an interactive **vis-networ
 
 ## Working Demo Link
 
-- First open the backend deployed link: 'https://dodge-5seu.onrender.com'
-- After the backend server is running properly open the Demo UI link: 'https://dodge-1.onrender.com/'
+ **Demo URL: 'https://dodge-1.onrender.com/'
 
 
 ---

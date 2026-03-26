@@ -9,6 +9,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 API_BASE = "https://dodge-5seu.onrender.com/api"
+BACKEND_BASE = "https://dodge-5seu.onrender.com/api"
 
 st.set_page_config(
     page_title="Mapping | Order to Cash",
@@ -16,7 +17,17 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
-
+# ✅ NEW: Backend wake-up logic
+def wait_for_backend(max_retries=8, delay=2):
+    for attempt in range(max_retries):
+        try:
+            res = requests.get(f"{BACKEND_BASE}/health", timeout=5)
+            if res.status_code == 200:
+                return True
+        except:
+            pass
+        time.sleep(delay)
+    return False
 
 
 def _inject_css() -> None:
@@ -192,15 +203,33 @@ div[data-testid="stHorizontalBlock"] {
 
 
 def api_get(path: str, params: dict[str, Any] | None = None) -> dict:
-    resp = requests.get(f"{API_BASE}{path}", params=params or {}, timeout=60)
-    resp.raise_for_status()
-    return resp.json()
+    if not wait_for_backend():
+        raise Exception("Backend is waking up. Try again in a few seconds.")
+
+    for _ in range(3):
+        try:
+            resp = requests.get(f"{API_BASE}{path}", params=params or {}, timeout=60)
+            resp.raise_for_status()
+            return resp.json()
+        except:
+            time.sleep(2)
+
+    raise Exception("API GET failed after retries")
 
 
 def api_post(path: str, payload: dict[str, Any]) -> dict:
-    resp = requests.post(f"{API_BASE}{path}", json=payload, timeout=120)
-    resp.raise_for_status()
-    return resp.json()
+    if not wait_for_backend():
+        raise Exception("Backend is waking up. Try again in a few seconds.")
+
+    for _ in range(3):
+        try:
+            resp = requests.post(f"{API_BASE}{path}", json=payload, timeout=120)
+            resp.raise_for_status()
+            return resp.json()
+        except:
+            time.sleep(2)
+
+    raise Exception("API POST failed after retries")
 
 
 def _default_focus() -> dict[str, Any]:
@@ -223,7 +252,6 @@ def init_state() -> None:
 
 
 def subgraph_params() -> dict[str, Any]:
-    """Query params for GET /graph/subgraph — one focused entity at a time (priority order)."""
     f = st.session_state.focus
     p: dict[str, Any] = {"limit": int(f.get("limit", 450))}
     if f.get("sales_order"):
@@ -282,6 +310,7 @@ def handle_submit():
             st.session_state.messages.append(
                 {"role": "assistant", "text": f"Request failed: {exc}"}
             )
+
 
 
 def primary_detail_node_id(nodes: list[dict], highlight_ids: list[str]) -> str | None:

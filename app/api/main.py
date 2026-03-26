@@ -11,7 +11,15 @@ def create_app() -> FastAPI:
         version="0.1.0",
         description="Graph + RAG document flow query engine",
     )
+
+    # ✅ Health check endpoint (IMPORTANT)
+    @app.get("/health")
+    def health():
+        return {"status": "ok"}
+
+    # Existing routes
     app.include_router(router, prefix="/api")
+
     return app
 
 
