@@ -8,7 +8,9 @@ import requests
 import streamlit as st
 import streamlit.components.v1 as components
 
-API_BASE = "http://127.0.0.1:8000/api"
+from app.config import settings
+
+API_BASE = settings.api_base.rstrip("/")
 
 st.set_page_config(
     page_title="Mapping | Order to Cash",

@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     neo4j_user: str
     neo4j_password: str
 
+    # Streamlit → FastAPI base URL including /api prefix (API_BASE — override in .env)
+    api_base: str
+
     # ChromaDB
     chroma_persist_dir: str = "./chroma_data"
 

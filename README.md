@@ -214,7 +214,7 @@ Base: `/api`
 - **Styling:** focused path uses stronger blue nodes/edges; overview edges stay lighter so the full graph remains visible.
 - **Chat:** messages are HTML-rendered; the composer is a bordered block with a status line and **Send**; submitting calls `POST /ask` and updates `session_state.focus` from `details.entity_ids` (with a fallback to journal IDs in `evidence` when needed), then the left panel refetches `/graph/subgraph` with the new focus.
 
-**Requirements:** the FastAPI server must be running at `http://127.0.0.1:8000` (see `API_BASE` in `streamlit_app/app.py`). Neo4j must contain data seeded via `scripts.seed_graph`.
+**Requirements:** the FastAPI server must be reachable at the URL implied by `API_BASE` in `.env` (default `http://127.0.0.1:8000/api`). Neo4j must contain data seeded via `scripts.seed_graph`.
 
 ---
 
