@@ -12,20 +12,8 @@ The **Streamlit app** (`streamlit_app/app.py`) pairs an interactive **vis-networ
 
 ## Working Demo Link
 
-- **Demo URL:** `<ADD_YOUR_DEPLOYED_LINK_HERE>`
-
----
-
-## Submission Checklist Mapping
-
-This repository includes:
-
-- A working API + Streamlit UI (graph visualization + chat)
-- Detailed architecture and design decisions in this README
-- Database choice and rationale
-- LLM prompting strategy and guardrails
-- Section and template for AI coding session logs
-- No-auth access model
+- **Demo URL:** `https://dodge-1.onrender.com/`
+It might take a few seconds to load the graph since its deployed on Render free service. 
 
 ---
 
@@ -286,35 +274,9 @@ Current validated outputs from this environment:
 
 ---
 
-## AI Coding Session Logs (Submission Requirement)
+## AI Coding Session Logs: 
 
-Include your tool session logs in the submission package.
-
-Recommended structure:
-
-```text
-submission_artifacts/
-  ai_session_logs/
-    copilot_session_log.txt
-    cursor_session_log.txt
-    claude_code_session_log.txt
-```
-
-Add a short manifest like:
-
-```text
-Tool: <tool_name>
-Date: <yyyy-mm-dd>
-Purpose: <what was built>
-Notes: <key prompts / outcomes>
-```
-
-For this project, include logs showing:
-
-- ingestion + graph construction work
-- RAG/vector seeding work
-- query pipeline and flow engine implementation
-- guardrails + API + UI integration
+https://opncd.ai/share/c1gExpME
 
 ---
 
