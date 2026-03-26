@@ -8,9 +8,7 @@ import requests
 import streamlit as st
 import streamlit.components.v1 as components
 
-from app.config import settings
-
-API_BASE = settings.api_base.rstrip("/")
+API_BASE = "https://dodge-5seu.onrender.com/api"
 
 st.set_page_config(
     page_title="Mapping | Order to Cash",
