@@ -12,8 +12,9 @@ The **Streamlit app** (`streamlit_app/app.py`) pairs an interactive **vis-networ
 
 ## Working Demo Link
 
-- **Demo URL:** `https://dodge-1.onrender.com/`
-It might take a few seconds to load the graph since its deployed on Render free service. 
+- First open the backend deployed link: 'https://dodge-5seu.onrender.com'
+- After the backend server is running properly open the Demo UI link: 'https://dodge-1.onrender.com/'
+
 
 ---
 
@@ -33,7 +34,7 @@ Given SAP-like operational datasets (orders, deliveries, billing docs, journal e
 ### Core stack
 
 - **Backend API:** FastAPI
-- **Graph DB:** Neo4j (Docker)
+- **Graph DB:** Neo4j (Aura DB)
 - **Vector DB:** ChromaDB (persistent local store)
 - **LLM:** Google Gemini (`gemini-2.0-flash`)
 - **Frontend:** Streamlit
