@@ -4,13 +4,13 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    # Google Gemini
-    gemini_api_key: str = "AIzaSyCdF2DGLYBwCLap5RzH5airEGmQ2STixhY"
+    # Google Gemini (GEMINI_API_KEY — set in .env, see .env.example)
+    gemini_api_key: str
 
-    # Neo4j
-    neo4j_uri: str = "bolt://localhost:7687"
-    neo4j_user: str = "neo4j"
-    neo4j_password: str = "dodge_password_123"
+    # Neo4j (NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD — set in .env, see .env.example)
+    neo4j_uri: str
+    neo4j_user: str
+    neo4j_password: str
 
     # ChromaDB
     chroma_persist_dir: str = "./chroma_data"
