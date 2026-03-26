@@ -10,7 +10,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 API_BASE = "https://dodge-5seu.onrender.com/api"
-BACKEND_BASE = "https://dodge-5seu.onrender.com"
+BACKEND_BASE = "https://dodge-5seu.onrender.com/api"
 
 st.set_page_config(
     page_title="Mapping | Order to Cash",
@@ -19,18 +19,15 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 # ✅ NEW: Backend wake-up logic
-def wait_for_backend(max_retries=8, delay=2):
-    print("waiting for backend")
-    for attempt in range(max_retries):
+def wait_for_backend(delay=3):
+    while True:
         try:
             res = requests.get(f"{BACKEND_BASE}/health", timeout=5)
             if res.status_code == 200:
-                print("ran successfully")
                 return True
         except:
             pass
         time.sleep(delay)
-    return False
 
 
 def _inject_css() -> None:
@@ -513,6 +510,38 @@ network.once('stabilizationIterationsDone', function() {{
 # ── Render ──────────────────────────────────────────────
 _inject_css()
 init_state()
+
+if "backend_ready" not in st.session_state:
+    st.session_state.backend_ready = False
+
+if not st.session_state.backend_ready:
+    st.markdown(
+        """
+        <div style="
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(255,255,255,0.96);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+            font-family: sans-serif;
+            color: #111827;  
+            text-align: center; 
+        ">
+            <h2>🚀 Starting backend...</h2>
+            <p>Please wait, server is waking up...</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    wait_for_backend()   # 👈 infinite wait
+
+    st.session_state.backend_ready = True
+    st.rerun()
 
 st.markdown(
     '<div class="top-nav">'
