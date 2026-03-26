@@ -1,3 +1,6 @@
+**AI Coding session logs: https://opncd.ai/share/c1gExpME**
+Below is the text file uploaded to the llm for providing my approach as well as the crux of the project and what are its demands.
+
 SYSTEM ROLE:
 You are an AI system that builds a graph-based enterprise document flow engine using Neo4j and a hybrid RAG pipeline.
 
