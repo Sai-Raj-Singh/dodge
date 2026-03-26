@@ -1,6 +1,7 @@
 """Graph-first Streamlit UI for SAP O2C Flow Engine."""
 
 import html
+import time
 import json
 from typing import Any
 
@@ -9,7 +10,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 API_BASE = "https://dodge-5seu.onrender.com/api"
-BACKEND_BASE = "https://dodge-5seu.onrender.com/api"
+BACKEND_BASE = "https://dodge-5seu.onrender.com"
 
 st.set_page_config(
     page_title="Mapping | Order to Cash",
@@ -19,10 +20,12 @@ st.set_page_config(
 )
 # ✅ NEW: Backend wake-up logic
 def wait_for_backend(max_retries=8, delay=2):
+    print("waiting for backend")
     for attempt in range(max_retries):
         try:
             res = requests.get(f"{BACKEND_BASE}/health", timeout=5)
             if res.status_code == 200:
+                print("ran successfully")
                 return True
         except:
             pass
